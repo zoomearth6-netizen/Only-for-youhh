@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> For youu 🫠🤍| My Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;900&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-mix: linear-gradient(135deg, #f3e5f5 0%, #ffffff 50%, #e1bee7 100%);
+            --blue-mix: linear-gradient(135deg, #e1f5fe 0%, #ffffff 50%, #b3e5fc 100%);
+            --thought-bg: #f8f4ff;
+            --pink-accent: #ff4081;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        html { scroll-behavior: smooth; }
+
+        body { 
+            height: 100vh; width: 100vw; overflow-x: hidden; 
+            background: #fdfcfb; transition: background 1.2s ease-in-out;
+        }
+
+        /* --- BACKGROUND FLOATING ELEMENTS --- */
+        #heartContainer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+        .floating-element { position: absolute; bottom: -50px; animation: floatUp 7s linear infinite; opacity: 0.7; z-index: 1; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        .main-wrapper { position: relative; z-index: 10; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+        /* --- PAGE TRANSITIONS --- */
+        .page-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; width: 100%; animation: slideFade 0.8s ease-out forwards; }
+        @keyframes slideFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- FANCY LETTER BOX --- */
+        .letter-box { 
+            width: 90%; max-width: 450px; background: white; padding: 45px 30px; 
+            border: 4.5px solid #1a1a1a; border-radius: 15px; position: relative;
+            box-shadow: 18px 18px 0px rgba(0,0,0,0.08);
+        }
+        .corner { position: absolute; font-size: 35px; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); z-index: 5; transition: 0.3s; }
+        .corner:hover { transform: scale(1.2) rotate(15deg); }
+        .tl { top: -25px; left: -25px; } .tr { top: -25px; right: -25px; }
+        .bl { bottom: -25px; left: -25px; } .br { bottom: -25px; right: -25px; }
+
+        /* --- VAULT UI --- */
+        .vault-card { background: white; padding: 35px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); width: 90%; max-width: 350px; text-align: center; border: 1.5px solid #fce4ec; }
+        .vault-name { font-family: 'Dancing Script', cursive; font-size: 38px; color: #d81b60; margin-bottom: 15px; }
+        .pass-screen { background: #fff5f7; height: 60px; border-radius: 18px; border: 2px solid #ffd1dc; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #d81b60; letter-spacing: 12px; font-weight: bold; }
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .num-btn { width: 68px; height: 68px; border-radius: 50%; border: 1px solid #eee; background: #fff; font-size: 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 5px 0 #eee; }
+        .num-btn:active { transform: translateY(4px); box-shadow: none; background: #fce4ec; }
+        .unlock-btn { width: 100%; margin-top: 30px; padding: 20px; border: none; border-radius: 50px; background: linear-gradient(45deg, #ff80ab, #ff4081); color: white; font-weight: 900; font-size: 17px; cursor: pointer; box-shadow: 0 10px 20px rgba(255, 64, 129, 0.3); transition: 0.3s; }
+        .unlock-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 64, 129, 0.4); }
+
+        /* --- PHOTO PAGE (CAT THOUGHTS STYLE) --- */
+        .photo-card { background: white; padding: 18px; border-radius: 20px; box-shadow: 0 15px 45px rgba(0,0,0,0.12); width: 310px; margin-bottom: 70px; position: relative; text-align: center; transform: rotate(0deg); transition: 0.5s; }
+        .photo-card img { width: 100%; border-radius: 12px; display: block; }
+        .photo-card:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 20; }
+        .divider-heart { margin: -35px 0; color: #ff80ab; font-size: 24px; display: flex; flex-direction: column; align-items: center; }
+        .divider-line { width: 2.5px; height: 70px; background: #d1c4e9; }
+
+        /* --- FANCY MUSIC POPUP --- */
+        .music-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 10000; animation: fadeIn 0.4s ease; }
+        .music-card { background: white; padding: 40px 30px; border-radius: 35px; width: 330px; text-align: center; border: 5px solid #673ab7; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .m-btn { width: 100%; padding: 16px; margin: 12px 0; border: 2.5px solid #e1bee7; border-radius: 18px; background: #f3e5f5; cursor: pointer; font-weight: 900; color: #673ab7; transition: 0.3s; }
+        .m-btn:hover { background: #673ab7; color: white; border-color: #673ab7; }
+
+        .hidden { display: none !important; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body id="mainBody">
+
+    <div id="heartContainer"></div>
+
+    <audio id="beep" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="m1" loop src="song1.mp3"></audio>
+    <audio id="m2" loop src="song2.mp3"></audio>
+    <audio id="m3" loop src="song3.mp3"></audio>
+
+    <div class="main-wrapper">
+        
+        <div id="loginPage" class="page-content">
+            <div class="vault-card">
+                <div class="vault-name">See What I have made for you 😼💓 </div>
+                <div class="pass-screen" id="display"></div>
+                <div class="numpad">
+                    <button class="num-btn" onclick="tap('1')">1</button><button class="num-btn" onclick="tap('2')">2</button><button class="num-btn" onclick="tap('3')">3</button>
+                    <button class="num-btn" onclick="tap('4')">4</button><button class="num-btn" onclick="tap('5')">5</button><button class="num-btn" onclick="tap('6')">6</button>
+                    <button class="num-btn" onclick="tap('7')">7</button><button class="num-btn" onclick="tap('8')">8</button><button class="num-btn" onclick="tap('9')">9</button>
+                    <button class="num-btn" onclick="clearP()">C</button><button class="num-btn" onclick="tap('0')">0</button><button class="num-btn" onclick="back()">⌫</button>
+                </div>
+                <button class="unlock-btn" onclick="unlock()">OPEN FOR YOUHH 🎁</button>
+            </div>
+        </div>
+
+        <div id="page1" class="page-content hidden">
+            <div class="letter-box" style="border-color: #6a1b9a;">
+                <div class="corner tl">🧸</div><div class="corner tr">🎀</div><div class="corner bl">🎀</div><div class="corner br">💖</div>
+                <div style="font-family: 'Dancing Script', cursive; font-size: 26px; line-height: 1.8;">
+                    Meri <span style="color:#d81b60; font-weight:900;">Prachi 🎀</span>,<br><br>
+                    Tum meri zindagi ki wo sabse sweet feeling ho jo kabhi khatam nahi hogi. Har baar jab main tumhari smile dekhta hoon, mujhe lagta hai ki duniya ki saari khushi mujhe mil gayi hai. <br><br>
+                    Prachi, tum sirf meri pasand nahi ho, tum meri sukoon ho. Tumhari har ek ada mere dil ko chhu jati hai. I Love You More Than Words! 💜✨
+                </div>
+                <button class="unlock-btn" style="background: #6a1b9a;" onclick="goTo(2)">Next Page 👉</button>
+            </div>
+        </div>
+
+        <div id="page2" class="page-content hidden">
+            <div class="letter-box" style="border-color: #0277bd;">
+                <div class="corner tl">🧸</div><div class="corner tr">🎀</div><div class="corner bl">🎀</div><div class="corner br">💙</div>
+                <div style="font-family: 'Dancing Script', cursive; font-size: 26px; line-height: 1.8; color: #01579b;">
+                    Sukoon matlab.... Sirf Tum! 🫵🏻💙<br><br>
+                    <span style="color:#d81b60;">😗💓</span>, I wanted to do something small today, simply because you matter to me. You show up with a calm kind of kindness that’s easy to be around. The way you listen, notice the little things, and stay genuine means a lot. 🌙 I don’t know where this goes, and that’s okay. I just wanted you to know I appreciate you, and I’m glad we have this connection. 🥹💓<br><br>
+                    Songs That Feel Like Us!! 🎵💙
+                </div>
+                <button class="unlock-btn" style="background: #0288d1;" onclick="toggleMusic(true)">Choose Music 🎵</button>
+                <button class="unlock-btn" style="background: #e91e63; margin-top:15px;" onclick="goTo(3)">See Surprise ❤️</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page-content hidden" style="justify-content: flex-start; padding-top: 60px;">
+            <p style="font-family:'Pacifico'; color:#b39ddb; font-size:20px;">the kind that matter ✨</p>
+            <h1 style="font-weight:900; color:#673ab7; font-size:32px; font-style:italic; margin-bottom:10px; text-align:center;">For, Special One 😋🩵</h1>
+            <p style="margin-bottom:50px; color:#888;">Every bit of my heart belongs to you... 💕</p>
+
+            <div class="photo-card" style="transform:rotate(-3deg);"><img src="photo1.jpg"><p style="margin-top:15px; font-weight:600;">Proof that I have great taste 😌”</p></div>
+            <div class="divider-heart"><div class="divider-line"></div>❤️<div class="divider-line"></div></div>
+            <div class="photo-card" style="transform:rotate(3deg);"><img src="photo2.jpg"><p style="margin-top:15px; font-weight:600;">“Main toh gaya kaam se 😮‍💨❤️</p></div>
+            <div class="divider-heart"><div class="divider-line"></div>❤️<div class="divider-line"></div></div>
+            <div class="photo-card" style="margin-bottom:80px;"><img src="photo3.jpg"><p style="margin-top:15px; font-weight:600;">Stop being adorable, I’m trying to act normal 😤</p>
+            <button class="unlock-btn" onclick="location.reload()" style="padding:15px;">Start Over ❤️</button></div>
+        </div>
+
+    </div>
+
+    <div id="musicMenu" class="music-overlay hidden">
+        <div class="music-card">
+            <h3 style="font-family:'Pacifico'; color:#673ab7; font-size:24px; margin-bottom:25px;"> Somee Music for Youuhh 🎀</h3>
+            <button class="m-btn" onclick="playM('m1')">I Lovee .....😗💓 </button>
+            <button class="m-btn" onclick="playM('m2')">Youuhh Soo Muchh... 🥹🩷</button>
+            <button class="m-btn" onclick="playM('m3')"> My Sillyyy Gurll...😼🫵🏻</button>
+            <button class="unlock-btn" style="background:#333; margin-top:20px;" onclick="stopM()">Stop Music 🔇</button>
+            <p onclick="toggleMusic(false)" style="margin-top:25px; cursor:pointer; color:#673ab7; text-decoration:underline; font-weight:600;">Back to Letter</p>
+        </div>
+    </div>
+
+    <script>
+        let code = "";
+        const correctCode = "140224";
+        let currentS = null;
+
+        function tap(n) { 
+            const b = document.getElementById('beep');
+            b.currentTime = 0; b.play();
+            if(code.length < 6) code += n; 
+            document.getElementById('display').innerText = "❤".repeat(code.length);
+        }
+        function clearP() { code = ""; document.getElementById('display').innerText = ""; }
+        function back() { code = code.slice(0, -1); document.getElementById('display').innerText = "❤".repeat(code.length); }
+
+        function unlock() {
+            if(code === correctCode) {
+                goTo(1);
+            } else { alert("Correct Pass: 140224"); clearP(); }
+        }
+
+        function goTo(num) {
+            // Smoothly scroll to top for new pages
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.add('hidden');
+
+            const body = document.getElementById('mainBody');
+            const targetPage = document.getElementById('page' + num);
+            
+            targetPage.classList.remove('hidden');
+
+            if(num === 1) body.style.background = "var(--purple-mix)";
+            if(num === 2) body.style.background = "var(--blue-mix)";
+            if(num === 3) body.style.background = "var(--thought-bg)";
+        }
+
+        function toggleMusic(s) { document.getElementById('musicMenu').classList.toggle('hidden', !s); }
+
+        function playM(id) {
+            if(currentS) currentS.pause();
+            currentS = document.getElementById(id);
+            currentS.play();
+            toggleMusic(false);
+        }
+        function stopM() { if(currentS) currentS.pause(); toggleMusic(false); }
+
+        // Non-stop Floating Hearts System
+        setInterval(() => {
+            const h = document.createElement('div');
+            const icons = ['❤️', '🎀', '✨', '🌸', '🧸', '💖'];
+            h.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            h.className = 'floating-element';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            h.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.getElementById('heartContainer').appendChild(h);
+            setTimeout(() => h.remove(), 7000);
+        }, 350);
+    </script>
+</body>
+</html>
